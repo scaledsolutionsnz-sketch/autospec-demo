@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autospec | Automotive Specialists · Blenheim, Marlborough</title>
+<meta name="description" content="Autospec — Blenheim's trusted automotive specialists. WOF inspections, servicing, repairs, pre-purchase inspections and more. Call 0800 424 258.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dk:    #07090E;
+  --s1:    #0D1119;
+  --s2:    #131A27;
+  --s3:    #1A2438;
+  --blue:  #0EA5E9;
+  --bllt:  #38BDF8;
+  --bldim: rgba(14,165,233,.09);
+  --bord:  rgba(14,165,233,.18);
+  --text:  #EEF3F8;
+  --body:  rgba(175,205,230,.72);
+  --muted: rgba(110,145,180,.48);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--dk);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* LOADER */
+.loader{position:fixed;inset:0;background:var(--dk);z-index:9000;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+.loader.gone{opacity:0;visibility:hidden}
+.ld-inner{display:flex;flex-direction:column;align-items:center;gap:1.2rem}
+.ld-logo{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.ld-bar{width:120px;height:2px;background:rgba(14,165,233,.12);border-radius:2px;overflow:hidden}
+.ld-fill{height:100%;background:var(--blue);animation:lf 1s ease forwards}
+@keyframes lf{from{width:0}to{width:100%}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0;height:70px;transition:background .35s,box-shadow .35s}
+nav.scrolled{background:rgba(7,9,14,.97);backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(255,255,255,.05)}
+.nav-logo{padding:0 1rem 0 1.5rem;display:flex;align-items:baseline;gap:.5rem;text-decoration:none}
+.nav-logo-name{font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--text)}
+.nav-logo-name span{color:var(--blue)}
+.nav-logo-sub{font-size:.6rem;font-weight:500;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{color:rgba(238,243,248,.48);text-decoration:none;font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{padding:0 1.5rem 0 0}
+.nav-cta a{background:var(--blue);color:#fff;text-decoration:none;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:.46rem 1.2rem;border-radius:5px;transition:background .2s,transform .15s;display:inline-block}
+.nav-cta a:hover{background:var(--bllt);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:.5rem;margin-right:1.2rem}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all .3s}
+.mob-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(7,9,14,.98);backdrop-filter:blur(20px);z-index:490;padding:1.2rem 1.5rem 1.6rem;border-bottom:1px solid rgba(255,255,255,.05)}
+.mob-menu.open{display:block}
+.mob-menu a{display:block;padding:.65rem 0;color:rgba(238,243,248,.55);text-decoration:none;font-size:.88rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid rgba(255,255,255,.05);transition:color .2s}
+.mob-menu a:last-child{border:none;background:var(--blue);color:#fff;text-align:center;border-radius:5px;margin-top:.6rem;padding:.7rem}
+.mob-menu a:hover{color:#fff}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1800&q=80') center/cover no-repeat;filter:brightness(.45) contrast(1.1) saturate(.7)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(125deg,rgba(7,9,14,.95) 0%,rgba(7,9,14,.7) 50%,rgba(7,9,14,.3) 100%)}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(14,165,233,.08) 0%,transparent 55%)}
+.hero-fade{position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to top,var(--dk),transparent)}
+.hero-inner{position:relative;z-index:2;padding:120px 7% 7rem;max-width:860px}
+.hero-tag{display:inline-flex;align-items:center;gap:.55rem;font-size:.67rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:1.4rem}
+.hero-tag::before{content:'';width:22px;height:1px;background:var(--blue)}
+h1.hero-h1{font-family:'Outfit',sans-serif;font-size:clamp(3rem,6.5vw,5.8rem);font-weight:900;line-height:.94;letter-spacing:-.02em;color:#fff;margin-bottom:1.5rem;text-transform:uppercase}
+h1.hero-h1 em{font-style:normal;color:var(--blue);display:block}
+.hero-sub{font-size:1rem;color:rgba(238,243,248,.75);line-height:1.78;max-width:460px;margin-bottom:2.2rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.btn-fill{display:inline-flex;align-items:center;gap:.45rem;background:var(--blue);color:#fff;text-decoration:none;font-family:'Outfit',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.05em;padding:.88rem 2rem;border-radius:6px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;text-transform:uppercase}
+.btn-fill:hover{background:var(--bllt);transform:translateY(-2px);box-shadow:0 12px 30px rgba(14,165,233,.35)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.45rem;background:transparent;color:rgba(238,243,248,.7);text-decoration:none;font-family:'Outfit',sans-serif;font-weight:600;font-size:.88rem;letter-spacing:.05em;padding:.88rem 1.8rem;border-radius:6px;border:1px solid rgba(238,243,248,.18);transition:border-color .2s,color .2s;text-transform:uppercase}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap}
+.hstat-n{font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:var(--blue);line-height:1}
+.hstat-l{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem}
+
+/* MARQUEE */
+.marquee{overflow:hidden;background:rgba(14,165,233,.05);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);padding:.82rem 0}
+.mq-track{display:flex;width:max-content;animation:mqs 28s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+.mq-item{font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,243,248,.28);padding:0 2.5rem;display:inline-flex;align-items:center;gap:2.5rem;white-space:nowrap}
+.mq-item::after{content:'▸';font-size:.5rem;color:var(--blue);opacity:.6}
+@keyframes mqs{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:6rem 7%}
+.eyebrow{font-size:.67rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:.8rem;display:flex;align-items:center;gap:.55rem}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--blue)}
+.sh{font-family:'Outfit',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;line-height:.95;letter-spacing:-.02em;text-transform:uppercase;color:var(--text);margin-bottom:1.1rem}
+.sec-body{font-size:.95rem;color:var(--body);line-height:1.82;max-width:520px}
+
+/* ABOUT */
+#about{background:var(--s1)}
+.about-grid{display:grid;grid-template-columns:1fr 400px;gap:5rem;align-items:center;margin-top:3rem}
+.about-text p{font-size:.95rem;color:var(--body);line-height:1.82;margin-bottom:1.1rem}
+.about-checks{list-style:none;margin:1.8rem 0 2rem;display:flex;flex-direction:column;gap:.6rem}
+.about-checks li{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:var(--body)}
+.about-checks li::before{content:'✓';color:var(--blue);font-weight:800;flex-shrink:0;margin-top:.05rem}
+.about-img-wrap{position:relative}
+.about-img{width:100%;height:480px;object-fit:cover;border-radius:14px;display:block;filter:brightness(.95) saturate(.88) contrast(1.04)}
+.about-badge{position:absolute;bottom:1.5rem;left:-1.5rem;background:rgba(7,9,14,.94);backdrop-filter:blur(14px);border:1px solid var(--bord);border-radius:12px;padding:1.2rem 1.6rem;text-align:center}
+.badge-n{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:900;color:var(--blue);line-height:1}
+.badge-l{font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:.2rem}
+
+/* SERVICES */
+#services{background:var(--dk)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
+.svc{background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:2rem 1.8rem;transition:border-color .3s,transform .25s;position:relative;overflow:hidden;cursor:default}
+.svc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.svc:hover{border-color:var(--bord);transform:translateY(-4px)}
+.svc:hover::after{transform:scaleX(1)}
+.svc-icon{font-size:2rem;margin-bottom:1.1rem}
+.svc h3{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.55rem;letter-spacing:.01em}
+.svc p{font-size:.86rem;color:var(--body);line-height:1.7}
+
+/* GALLERY */
+#work{background:var(--s1)}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.8rem}
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}
+.gi{border-radius:12px;overflow:hidden;position:relative}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.gi:hover img{transform:scale(1.05)}
+.gi:nth-child(1){grid-column:1/8;height:280px}
+.gi:nth-child(2){grid-column:8/13;height:280px}
+.gi:nth-child(3){grid-column:1/5;height:240px}
+.gi:nth-child(4){grid-column:5/9;height:240px}
+.gi:nth-child(5){grid-column:9/13;height:240px}
+
+/* REVIEWS */
+#reviews{background:var(--dk)}
+.reviews-top{display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.rating-card{background:var(--s2);border:1px solid var(--bord);border-radius:16px;padding:2.5rem;text-align:center;min-width:210px}
+.rc-score{font-family:'Outfit',sans-serif;font-size:4.5rem;font-weight:900;color:var(--text);line-height:1}
+.rc-stars{display:flex;justify-content:center;gap:4px;margin:.4rem 0}
+.rc-star{color:#f59e0b;font-size:1.2rem}
+.rc-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
+.rc-google{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.7rem;color:var(--muted)}
+.rev-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.rev-card{background:var(--s2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1.8rem;transition:border-color .3s;display:flex;flex-direction:column;gap:.9rem}
+.rev-card:hover{border-color:var(--bord)}
+.rev-stars{display:flex;gap:3px}
+.rev-star{color:#f59e0b;font-size:.88rem}
+.rev-text{font-size:.9rem;color:var(--body);line-height:1.72;font-style:italic}
+.rev-author{display:flex;align-items:center;gap:.75rem}
+.rev-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--bllt));display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:.88rem;color:#fff;flex-shrink:0}
+.rev-name{font-weight:600;font-size:.88rem}
+.rev-date{font-size:.72rem;color:var(--muted);margin-top:.1rem}
+.reviews-cta{text-align:center;margin-top:2.5rem}
+
+/* CTA BAND */
+.cta-band{padding:5rem 7%;background:linear-gradient(125deg,rgba(14,165,233,.1) 0%,rgba(14,165,233,.03) 100%);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.ctab-text h2{font-family:'Outfit',sans-serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;letter-spacing:-.02em;text-transform:uppercase;color:var(--text);margin-bottom:.4rem}
+.ctab-text p{font-size:.93rem;color:var(--body)}
+
+/* CONTACT */
+#contact{background:var(--s1)}
+.contact-wrap{display:grid;grid-template-columns:1fr 460px;gap:5rem;align-items:start}
+.contact-lhs p{font-size:.94rem;color:var(--body);line-height:1.82;margin-bottom:2rem;max-width:380px}
+.c-items{display:flex;flex-direction:column;gap:1.1rem;margin-bottom:2.2rem}
+.c-item{display:flex;align-items:flex-start;gap:.9rem}
+.c-icon{width:40px;height:40px;border-radius:10px;background:var(--bldim);border:1px solid var(--bord);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.c-label{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.15rem}
+.c-val{font-size:.9rem;color:var(--text);font-weight:500;text-decoration:none;transition:color .2s;display:block}
+.c-val:hover{color:var(--blue)}
+.c-sub{font-size:.78rem;color:var(--muted);margin-top:.12rem}
+.form-box{background:var(--s2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2.2rem}
+.form-title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:1.4rem;letter-spacing:.02em;text-transform:uppercase}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.fg{margin-bottom:.85rem}
+.fg label{display:block;font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.38rem}
+.fg input,.fg select,.fg textarea{width:100%;padding:.72rem .95rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(110,145,180,.3)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(14,165,233,.42)}
+.fg select option{background:var(--s2);color:var(--text)}
+.fg textarea{resize:vertical;min-height:110px}
+.fsub{width:100%;padding:.9rem;background:var(--blue);color:#fff;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;margin-top:.3rem}
+.fsub:hover{background:var(--bllt);transform:translateY(-1px)}
+.fnote{font-size:.73rem;color:var(--muted);text-align:center;margin-top:.7rem}
+.form-ok{display:none;text-align:center;padding:2.5rem 1rem}
+.form-ok.show{display:block}
+.form-ok .ok-icon{font-size:3rem;margin-bottom:.8rem}
+.form-ok h3{font-family:'Outfit',sans-serif;font-size:1.35rem;font-weight:700;text-transform:uppercase;color:var(--text);margin-bottom:.5rem}
+.form-ok p{font-size:.9rem;color:var(--body)}
+
+/* FOOTER */
+footer{background:rgba(7,9,14,.98);border-top:1px solid rgba(255,255,255,.05);padding:2.5rem 7%;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.foot-brand{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-bottom:.3rem}
+.foot-brand span{color:var(--blue)}
+.foot-copy{font-size:.72rem;color:var(--muted)}
+.foot-links{display:flex;gap:1.8rem;flex-wrap:wrap}
+.foot-links a{font-size:.7rem;color:var(--muted);text-decoration:none;text-transform:uppercase;letter-spacing:.08em;transition:color .2s}
+.foot-links a:hover{color:var(--blue)}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .about-grid,.contact-wrap{grid-template-columns:1fr}
+  .about-badge{left:1rem}
+  .about-img{height:380px}
+  .reviews-top{grid-template-columns:1fr}
+  .rating-card{display:flex;gap:2rem;align-items:center;text-align:left;padding:1.5rem 2rem}
+  .rc-stars{justify-content:flex-start}
+  .rc-google{justify-content:flex-start}
+  .gallery{grid-template-columns:1fr 1fr;gap:.8rem}
+  .gi{grid-column:auto!important;height:220px}
+}
+@media(max-width:768px){
+  section{padding:4.5rem 5%}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .rev-cards{grid-template-columns:1fr}
+  .cta-band{flex-direction:column;text-align:center}
+}
+@media(max-width:540px){
+  section{padding:4rem 5%}
+  .services-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .gi{height:200px}
+  .frow{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center}
+  .foot-links{justify-content:center}
+  h1.hero-h1{font-size:clamp(2.8rem,12vw,3.8rem)}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="ld-inner">
+    <div class="ld-logo">Autospec</div>
+    <div class="ld-bar"><div class="ld-fill"></div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-name">Auto<span>spec</span></span>
+    <span class="nav-logo-sub">Blenheim · Marlborough</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta"><a href="tel:0800424258">0800 424 258</a></div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#work" onclick="closeMob()">Gallery</a>
+  <a href="#reviews" onclick="closeMob()">Reviews</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="tel:0800424258" onclick="closeMob()">0800 424 258</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Blenheim's Automotive Specialists</div>
+    <h1 class="hero-h1">Your Car,<em>In Expert Hands.</em></h1>
+    <p class="hero-sub">WOF inspections, servicing, repairs and more — professional automotive care you can trust, right here in Blenheim.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-fill">Book a Service →</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hstat-n">5.0★</div>
+        <div class="hstat-l">Google Rating</div>
+      </div>
+      <div>
+        <div class="hstat-n">0800</div>
+        <div class="hstat-l">424 258</div>
+      </div>
+      <div>
+        <div class="hstat-n">BLM</div>
+        <div class="hstat-l">Based in Blenheim</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="mq-track">
+    <span class="mq-item">WOF Inspections</span>
+    <span class="mq-item">Vehicle Servicing</span>
+    <span class="mq-item">Auto Repairs</span>
+    <span class="mq-item">Pre-Purchase Inspections</span>
+    <span class="mq-item">Diagnostics</span>
+    <span class="mq-item">Tyres & Wheels</span>
+    <span class="mq-item">Blenheim · Marlborough</span>
+    <span class="mq-item">5-Star Rated</span>
+    <span class="mq-item">WOF Inspections</span>
+    <span class="mq-item">Vehicle Servicing</span>
+    <span class="mq-item">Auto Repairs</span>
+    <span class="mq-item">Pre-Purchase Inspections</span>
+    <span class="mq-item">Diagnostics</span>
+    <span class="mq-item">Tyres & Wheels</span>
+    <span class="mq-item">Blenheim · Marlborough</span>
+    <span class="mq-item">5-Star Rated</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="eyebrow">About Autospec</div>
+      <h2 class="sh">Blenheim's trusted auto specialists.</h2>
+      <p>At Autospec, we take the stress out of vehicle maintenance. Whether your car needs a WOF, a full service, or an unexpected repair, our experienced team in Blenheim will get you sorted — quickly, honestly, and at a fair price.</p>
+      <p>We're proud of our 5-star Google rating because we've earned it. No upselling, no surprises on the invoice — just straight-talking automotive expertise from people who care about getting it right.</p>
+      <ul class="about-checks">
+        <li>WOF inspections — fast, thorough, no unnecessary fails</li>
+        <li>Full vehicle servicing for all makes and models</li>
+        <li>Honest diagnostics and transparent pricing</li>
+        <li>Pre-purchase inspections — know before you buy</li>
+        <li>Friendly, approachable team you can trust</li>
+      </ul>
+      <a href="#contact" class="btn-fill" style="margin-top:.5rem">Book Now →</a>
+    </div>
+    <div class="about-img-wrap reveal d2">
+      <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&q=80" alt="Autospec — automotive workshop in Blenheim, Marlborough" class="about-img">
+      <div class="about-badge">
+        <div class="badge-n">5.0★</div>
+        <div class="badge-l">Google rated</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="eyebrow">What we do</div>
+    <h2 class="sh">Our Services.</h2>
+    <p class="sec-body" style="margin-bottom:0">Full-spectrum automotive care for Blenheim drivers — from routine WOFs to complex repairs.</p>
+  </div>
+  <div class="services-grid">
+    <div class="svc reveal d1">
+      <div class="svc-icon">🔍</div>
+      <h3>WOF Inspections</h3>
+      <p>Fast, thorough Warrant of Fitness inspections. We check everything required — and only flag genuine issues. No unnecessary failures.</p>
+    </div>
+    <div class="svc reveal d2">
+      <div class="svc-icon">🔧</div>
+      <h3>Vehicle Servicing</h3>
+      <p>Regular servicing to keep your vehicle running at its best. Oil, filters, fluids, belts — all makes and models, done right.</p>
+    </div>
+    <div class="svc reveal d3">
+      <div class="svc-icon">🛠️</div>
+      <h3>Auto Repairs</h3>
+      <p>From minor fixes to major mechanical repairs — we diagnose the problem accurately and give you a clear, honest quote before we start.</p>
+    </div>
+    <div class="svc reveal d4">
+      <div class="svc-icon">🔬</div>
+      <h3>Pre-Purchase Inspections</h3>
+      <p>Thinking of buying a used car? Our pre-purchase inspection will tell you exactly what you're getting — no nasty surprises down the road.</p>
+    </div>
+    <div class="svc reveal d5">
+      <div class="svc-icon">💻</div>
+      <h3>Diagnostics</h3>
+      <p>Modern vehicles, modern tools. We use advanced diagnostic equipment to pinpoint issues quickly and accurately — saving you time and money.</p>
+    </div>
+    <div class="svc reveal d6">
+      <div class="svc-icon">⚙️</div>
+      <h3>Tyres & Wheels</h3>
+      <p>Tyre supply, fitting, balancing and wheel alignment — all in-house. We'll help you find the right tyre for your vehicle and budget.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="work" style="background:var(--s1)">
+  <div class="work-head reveal">
+    <div>
+      <div class="eyebrow">Our Workshop</div>
+      <h2 class="sh">Where the work happens.</h2>
+    </div>
+    <a href="#contact" class="btn-ghost">Book a service →</a>
+  </div>
+  <div class="gallery reveal">
+    <div class="gi">
+      <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=900&q=80" alt="Vehicle on hoist at Autospec workshop, Blenheim">
+    </div>
+    <div class="gi">
+      <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=900&q=80" alt="Autospec technician performing vehicle service in Blenheim">
+    </div>
+    <div class="gi">
+      <img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=900&q=80" alt="Automotive diagnostics at Autospec, Marlborough">
+    </div>
+    <div class="gi">
+      <img src="https://images.unsplash.com/photo-1632823471565-1ecdf5c6da36?w=900&q=80" alt="Engine repair by Autospec Blenheim">
+    </div>
+    <div class="gi">
+      <img src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=900&q=80" alt="Professional automotive care at Autospec, Blenheim NZ">
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="eyebrow reveal">Google Reviews</div>
+  <h2 class="sh reveal">What our customers say.</h2>
+  <div class="reviews-top">
+    <div class="rating-card reveal">
+      <div>
+        <div class="rc-score">5.0</div>
+        <div class="rc-stars">
+          <span class="rc-star">★</span><span class="rc-star">★</span><span class="rc-star">★</span><span class="rc-star">★</span><span class="rc-star">★</span>
+        </div>
+        <div class="rc-label">on Google</div>
+        <div class="rc-google">
+          <svg width="12" height="12" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          2 verified reviews
+        </div>
+      </div>
+    </div>
+    <div class="rev-cards">
+      <div class="rev-card reveal">
+        <div class="rev-stars">
+          <span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span>
+        </div>
+        <p class="rev-text">"Took my car in for a WOF and service — Jason and the team were fantastic. No drama, no upselling, just straight-up honest work at a fair price. Had it done same day. These guys are exactly what you want in a mechanic."</p>
+        <div class="rev-author">
+          <div class="rev-av">M</div>
+          <div>
+            <div class="rev-name">Matt W.</div>
+            <div class="rev-date">Blenheim · Google Review</div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card reveal d2">
+        <div class="rev-stars">
+          <span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span>
+        </div>
+        <p class="rev-text">"Really happy with Autospec. Brought my car in for a pre-purchase inspection and they were incredibly thorough — gave me a full rundown with no fluff. Ended up saving me from a very dodgy purchase. Highly recommend."</p>
+        <div class="rev-author">
+          <div class="rev-av">S</div>
+          <div>
+            <div class="rev-name">Sarah K.</div>
+            <div class="rev-date">Blenheim · Google Review</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-cta reveal">
+    <a href="review.html" class="btn-fill">Leave Us a Review</a>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <div class="ctab-text">
+    <h2>Ready to book your vehicle in?</h2>
+    <p>Call us on 0800 424 258 or fill in the form — we'll get you sorted.</p>
+  </div>
+  <a href="#contact" class="btn-fill">Book a Service →</a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-lhs reveal">
+      <div class="eyebrow">Get in touch</div>
+      <h2 class="sh">Book your vehicle in.</h2>
+      <p>Fill out the form and Jason will be in touch promptly to confirm your booking. Or call us directly — we're always happy to chat.</p>
+      <div class="c-items">
+        <div class="c-item">
+          <div class="c-icon">📞</div>
+          <div>
+            <div class="c-label">Phone</div>
+            <a href="tel:0800424258" class="c-val">0800 424 258</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">✉️</div>
+          <div>
+            <div class="c-label">Email</div>
+            <a href="mailto:autosepc2018@gmail.com" class="c-val">autosepc2018@gmail.com</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div>
+            <div class="c-label">Location</div>
+            <span class="c-val" style="cursor:default">Blenheim, Marlborough</span>
+            <div class="c-sub">Serving all of Marlborough</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="form-box">
+        <div class="form-title">Book a Service</div>
+        <div id="formOk" class="form-ok">
+          <div class="ok-icon">✅</div>
+          <h3>Booking Received</h3>
+          <p>Jason will be in touch shortly to confirm. For urgent bookings call <a href="tel:0800424258" style="color:var(--blue)">0800 424 258</a>.</p>
+        </div>
+        <form id="contactForm" action="https://api.staticforms.xyz/submit" method="post" onsubmit="handleForm(event)">
+          <input type="hidden" name="apiKey" value="sf_768da8d33927e7f4f241d0a6">
+          <input type="hidden" name="subject" value="New Booking — Autospec Blenheim">
+          <input type="hidden" name="replyTo" value="@">
+          <input type="text" name="honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <div class="frow">
+            <div class="fg">
+              <label>First Name</label>
+              <input type="text" name="firstName" placeholder="John" required>
+            </div>
+            <div class="fg">
+              <label>Last Name</label>
+              <input type="text" name="lastName" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="john@example.com" required>
+          </div>
+          <div class="fg">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="027 000 0000">
+          </div>
+          <div class="fg">
+            <label>Service Required</label>
+            <select name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option value="WOF Inspection">WOF Inspection</option>
+              <option value="Vehicle Service">Vehicle Service</option>
+              <option value="Auto Repair">Auto Repair</option>
+              <option value="Pre-Purchase Inspection">Pre-Purchase Inspection</option>
+              <option value="Diagnostics">Diagnostics</option>
+              <option value="Tyres & Wheels">Tyres & Wheels</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Vehicle & Message</label>
+            <textarea name="message" placeholder="Tell us your vehicle make/model and what's needed…" required></textarea>
+          </div>
+          <button type="submit" class="fsub" id="submitBtn">Send Booking →</button>
+          <p class="fnote">We typically respond within a couple of hours.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-brand">Auto<span>spec</span></div>
+    <div class="foot-copy">© 2025 Autospec · Blenheim, Marlborough NZ · 0800 424 258</div>
+  </div>
+  <div class="foot-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="review.html">Leave a Review</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('gone'), 900));
+
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+const hamburger = document.getElementById('hamburger');
+const mobMenu   = document.getElementById('mobMenu');
+hamburger.addEventListener('click', () => mobMenu.classList.toggle('open'));
+function closeMob(){ mobMenu.classList.remove('open'); }
+
+const io = new IntersectionObserver(entries =>
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),
+  { threshold: 0.1 }
+);
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+async function handleForm(e){
+  e.preventDefault();
+  const form = e.target, btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  try {
+    const res  = await fetch('https://api.staticforms.xyz/submit', { method:'POST', body: new FormData(form) });
+    const json = await res.json();
+    if(json.success){
+      form.style.display = 'none';
+      document.getElementById('formOk').classList.add('show');
+    } else { throw new Error(); }
+  } catch {
+    btn.textContent = 'Error — try again';
+    btn.style.background = '#c0392b';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

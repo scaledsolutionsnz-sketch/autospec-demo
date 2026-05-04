@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave a Review — Autospec Blenheim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--dk:#07090E;--s1:#0D1119;--blue:#0EA5E9;--bllt:#38BDF8;--bord:rgba(14,165,233,.2);--text:#EEF3F8;--body:rgba(175,205,230,.72);--muted:rgba(110,145,180,.48)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--dk);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;-webkit-font-smoothing:antialiased;position:relative;overflow:hidden}
+body::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(14,165,233,.07) 0%,transparent 60%);pointer-events:none}
+
+.back{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--muted);font-size:.76rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2rem;transition:color .2s}
+.back:hover{color:var(--blue)}
+
+.brand{display:flex;flex-direction:column;align-items:center;margin-bottom:2rem;text-decoration:none}
+.brand-name{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--text)}
+.brand-name span{color:var(--blue)}
+.brand-sub{font-size:.58rem;font-weight:500;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:.15rem}
+
+.card{position:relative;z-index:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:3rem 3.5rem;max-width:500px;width:100%;text-align:center;backdrop-filter:blur(14px)}
+.card-eye{font-size:.6rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--blue);margin-bottom:.9rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.card-eye::before,.card-eye::after{content:'';display:block;width:18px;height:1px;background:rgba(14,165,233,.4)}
+.card h1{font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:900;letter-spacing:-.02em;text-transform:uppercase;color:var(--text);margin-bottom:.55rem;line-height:1.05}
+.card h1 em{font-style:normal;color:var(--bllt)}
+.card-sub{font-size:.88rem;color:var(--body);line-height:1.72;margin-bottom:2.2rem}
+
+.stars{display:flex;justify-content:center;gap:.5rem;margin-bottom:.7rem}
+.star{font-size:2.8rem;cursor:pointer;transition:transform .15s,filter .15s;filter:grayscale(1) brightness(.4);user-select:none;line-height:1}
+.star.lit{filter:none;transform:scale(1.1)}
+.star:hover{transform:scale(1.18)}
+
+.rating-label{font-size:.8rem;color:var(--muted);min-height:1.2em;margin-bottom:2rem;letter-spacing:.04em;transition:opacity .2s}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem 2.4rem;background:var(--blue);color:#fff;border:none;border-radius:7px;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:background .2s,transform .2s;width:100%;opacity:.35;pointer-events:none}
+.btn.active{opacity:1;pointer-events:auto}
+.btn.active:hover{background:var(--bllt);transform:translateY(-2px)}
+
+.divider{width:40px;height:1px;background:rgba(255,255,255,.08);margin:1.8rem auto 1.4rem}
+.priv-note{font-size:.74rem;color:var(--muted)}
+.priv-note a{color:rgba(238,243,248,.35);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.14)}
+.priv-note a:hover{color:var(--blue)}
+
+@media(max-width:480px){.card{padding:2rem 1.5rem}.card h1{font-size:1.45rem}.star{font-size:2.2rem}}
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  Back to site
+</a>
+
+<a href="index.html" class="brand">
+  <span class="brand-name">Auto<span>spec</span></span>
+  <span class="brand-sub">Blenheim · Marlborough NZ</span>
+</a>
+
+<div class="card">
+  <div class="card-eye">Your Feedback</div>
+  <h1>How Did We <em>Do?</em></h1>
+  <p class="card-sub">We'd love to hear about your experience. Rate us below — happy customers get sent straight to Google so your review can help others find us.</p>
+
+  <div class="stars" id="stars">
+    <span class="star" data-val="1">⭐</span>
+    <span class="star" data-val="2">⭐</span>
+    <span class="star" data-val="3">⭐</span>
+    <span class="star" data-val="4">⭐</span>
+    <span class="star" data-val="5">⭐</span>
+  </div>
+  <div class="rating-label" id="ratingLabel">Select a rating</div>
+
+  <button class="btn" id="continueBtn" onclick="proceed()">Continue →</button>
+
+  <div class="divider"></div>
+  <p class="priv-note">Prefer to leave <a href="private.html">private feedback?</a></p>
+</div>
+
+<script>
+const LABELS = ['','Needs improvement','Could be better','Good experience','Great experience','Outstanding — 5 stars!'];
+const GOOGLE_URL = 'https://www.google.com/maps/search/Autospec+Blenheim';
+let selected = 0;
+
+const stars = document.querySelectorAll('.star');
+const label = document.getElementById('ratingLabel');
+const btn   = document.getElementById('continueBtn');
+
+stars.forEach((s, i) => {
+  s.addEventListener('mouseenter', () => {
+    stars.forEach((x, j) => x.classList.toggle('lit', j <= i));
+    label.textContent = LABELS[i + 1];
+  });
+  s.addEventListener('mouseleave', () => {
+    stars.forEach((x, j) => x.classList.toggle('lit', j < selected));
+    label.textContent = selected ? LABELS[selected] : 'Select a rating';
+  });
+  s.addEventListener('click', () => {
+    selected = i + 1;
+    stars.forEach((x, j) => x.classList.toggle('lit', j < selected));
+    label.textContent = LABELS[selected];
+    btn.classList.add('active');
+  });
+});
+
+function proceed(){
+  if(!selected) return;
+  window.location.href = selected >= 4 ? GOOGLE_URL : 'private.html?rating=' + selected;
+}
+</script>
+</body>
+</html>
